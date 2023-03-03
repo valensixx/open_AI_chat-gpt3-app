@@ -68,4 +68,10 @@ const handleSubmit = async (e) => {
     chatContainer.innerHTML += chatStripe(false, data.get('prompt'));
 
     form.reset();
+
+    //chat bot's chatstripe
+    const uniqueId = genetateUniqueId();
+    chatContainer.innerHTML += chatStripe(true, " ", uniqueId); //we are filling it up from loader function!
+
+    chatContainer.scrollTop = chatContainer.scrollHeight; //this will put the new messages in a view
 }
