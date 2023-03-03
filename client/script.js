@@ -15,5 +15,18 @@ function loader (element) {
         if(element.textContent === '....'){
             element.textContent = '';
         }
-    }, 300);
+    }, 300); //time to respond 300ms
+}
+
+function typeText(element, text){
+    let index = 0;
+
+    let interval = setInterval(()=>{
+        if (index < text.lenght) {
+            element.innerHTML += text.chartAt(index);
+            index ++;  //type charecter 1 by one like it is type by a human.
+        } else {
+            clearInterval(interval);
+        }
+    }, 20); //time to respont 20ms
 }
