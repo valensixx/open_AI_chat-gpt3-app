@@ -18,17 +18,18 @@ function loader (element) {
     }, 300); //time to respond 300ms
 }
 
+
 function typeText(element, text){
     let index = 0;
 
     let interval = setInterval(()=>{
-        if (index < text.lenght) {
-            element.innerHTML += text.chartAt(index);
+        if (index < text.length) {
+            element.innerHTML += text.charAt(index);
             index ++;  //type charecter 1 by one like it is type by a human.
         } else {
             clearInterval(interval);
         }
-    }, 20); //time to respont 20ms
+    }, 20); //time to respond 20ms
 }
 
 function genetateUniqueId(){
@@ -42,15 +43,15 @@ function genetateUniqueId(){
 function chatStripe (isAi, value, uniqueId) {
     return (
         `
-        <div class = "wrapper ${isAi && 'ai'}">
-            <div class = "chat">
-                <div class = "profile">
+        <div class="wrapper ${isAi && 'ai'}">
+            <div class="chat">
+                <div class="profile">
                     <img 
-                        src = "${isAi ? bot : user}"
-                        alt = "${isAi ? 'bot' : 'user'}"
+                        src="${isAi ? bot : user}"
+                        alt="${isAi ? 'bot' : 'user'}"
                     />
                 </div>
-                <div class="message id=${uniqueId}">
+                <div class="message" id="${uniqueId}">
                     ${value}
                 </div>
             </div>
@@ -58,6 +59,7 @@ function chatStripe (isAi, value, uniqueId) {
         `
     )
 }
+
 
 const handleSubmit = async (e) => {
     e.preventDefault();
@@ -74,4 +76,16 @@ const handleSubmit = async (e) => {
     chatContainer.innerHTML += chatStripe(true, " ", uniqueId); //we are filling it up from loader function!
 
     chatContainer.scrollTop = chatContainer.scrollHeight; //this will put the new messages in a view
+
+    const messageDiv = document.getElementById(uniqueId);
+
+    loader(messageDiv); 
 }
+
+
+form.addEventListener('submit', handleSubmit);
+form.addEventListener('keyup', (e) => {
+    if (e.keyCode === 13){
+        handleSubmit(e);
+    }
+});
